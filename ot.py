@@ -110,6 +110,8 @@ def checkAllBins():
 	libArray=[]
 	bindirs = [	"/usr/bin/",
 				"/usr/sbin/",
+				"/usr/local/bin/",
+				"/usr/local/sbin/",
 				"/bin/",
 				"/sbin/"]
 
