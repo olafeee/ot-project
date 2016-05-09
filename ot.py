@@ -1,5 +1,6 @@
 import os, subprocess
 from os import walk
+import os.path
 
 import xlsxwriter
 
@@ -107,9 +108,9 @@ def checkAllBins():
 	err=0
 	binArray=[]
 	libArray=[]
-	bindirs = [	#"/usr/bin/",
-				#"/usr/sbin/",
-				#"/bin/",
+	bindirs = [	"/usr/bin/",
+				"/usr/sbin/",
+				"/bin/",
 				"/sbin/"]
 
 	for dirs in bindirs:
@@ -178,7 +179,23 @@ def checkAllBins():
 
 	workbook.close()
 
-checkAllBins()
+# proc = subprocess.Popen(['bash','checksec.sh',], stdout=subprocess.PIPE)
+# tmp = proc.stdout.read()
+
+# if tmp is not "No such file or directory":
+	# checkAllBins()
+
+x = os.path.isfile("checksec.sh")
+
+if not x:
+	subprocess.call(["wget", "http://www.trapkit.de/tools/checksec.sh"])
+
+x = os.path.isfile("checksec.sh")
+
+if x:
+	checkAllBins()
+elif not x:
+	print "checksec.sh download failed, download the file manualyyasdasd"
 
 # getPIE(binary, "bin")
 
